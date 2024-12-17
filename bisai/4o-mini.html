@@ -1,0 +1,270 @@
+
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熊猫饮食 (Panda Diet) App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .welcome {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .panda {
+            width: 150px;
+            height: auto;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .quiz {
+            margin: 20px 0;
+        }
+
+        .meal-plan, .progress, .feedback {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .meal-plan h2, .progress h2, .feedback h2 {
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        .progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .progress-bar div {
+            background-color: #4CAF50;
+            height: 20px;
+            width: 80%; /* Example progress */
+        }
+
+        .recipe {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .recipe img {
+            width: 50px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .grocery-list {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            list-style: none;
+        }
+
+        .grocery-list li {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .grocery-list li:hover {
+            background-color: #f9f9f9;
+        }
+
+        .footer {
+            text-align: center;
+            margin: 40px 0;
+            color: #777;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="welcome">
+        <img src="https://example.com/panda-illustration.svg" alt="Panda" class="panda">
+        <h1>欢迎使用 熊猫饮食 App!</h1>
+        <p>通过个性化饮食计划帮助您实现饮食目标。</p>
+        <a href="#" class="button" id="start-quiz">开始体验</a>
+    </div>
+
+    <div id="quiz" class="quiz" style="display:none;">
+        <h2>个性测试</h2>
+        <div>
+            <p>早上你通常感觉如何?</p>
+            <button class="button" data-answer="energized">精力充沛</button>
+            <button class="button" data-answer="tired">疲惫不堪</button>
+            <button class="button" data-answer="neutral">中性</button>
+        </div>
+        <div>
+            <p>你最渴望的食物类型是什么?</p>
+            <button class="button" data-answer="salty">咸味</button>
+            <button class="button" data-answer="sweet">甜味</button>
+            <button class="button" data-answer="spicy">辛辣</button>
+        </div>
+        <div>
+            <p>你如何应对压力?</p>
+            <button class="button" data-answer="exercise">锻炼</button>
+            <button class="button" data-answer="eat">吃东西</button>
+            <button class="button" data-answer="meditate">冥想</button>
+        </div>
+        <div>
+            <p>你喜欢的生活节奏是什么?</p>
+            <button class="button" data-answer="fast-paced">快节奏</button>
+            <button class="button" data-answer="balanced">平衡</button>
+            <button class="button" data-answer="slow-paced">慢节奏</button>
+        </div>
+        <a href="#" class="button" id="submit-quiz">提交</a>
+    </div>
+
+    <div id="results" class="meal-plan" style="display:none;">
+        <h2>饮食类型: 平衡土</h2>
+        <p>您的饮食方案已经生成。</p>
+        <h3>今天的餐单</h3>
+        <div class="recipe">
+            <img src="https://example.com/breakfast.jpg" alt="Breakfast">
+            <span>早餐：燕麦粥</span>
+        </div>
+        <div class="recipe">
+            <img src="https://example.com/lunch.jpg" alt="Lunch">
+            <span>午餐：鸡肉沙拉</span>
+        </div>
+        <div class="recipe">
+            <img src="https://example.com/dinner.jpg" alt="Dinner">
+            <span>晚餐：蒸鱼</span>
+        </div>
+        <h3>进度跟踪</h3>
+        <div class="progress">
+            <h4>达成目标的进度</h4>
+            <div class="progress-bar"><div></div></div>
+        </div>
+    </div>
+
+    <div id="grocery" class="grocery-list" style="display:none;">
+        <h2>购物清单</h2>
+        <ul>
+            <li>燕麦</li>
+            <li>鸡肉</li>
+            <li>生菜</li>
+            <li>鱼</li>
+            <li>米饭</li>
+        </ul>
+    </div>
+
+    <div id="feedback" class="feedback" style="display:none;">
+        <h2>反馈</h2>
+        <textarea id="feedback-text" rows="5" placeholder="请给我们您的反馈..."></textarea>
+        <br>
+        <button class="button" id="submit-feedback">提交反馈</button>
+        <p id="feedback-response" style="color: green; margin-top: 10px;"></p>
+    </div>
+
+    <div class="footer">
+        <p>感谢您使用熊猫饮食 App！我们期待您的反馈！</p>
+    </div>
+</div>
+
+<script>
+    const startQuizButton = document.getElementById('start-quiz');
+    const quizSection = document.getElementById('quiz');
+    const resultsSection = document.getElementById('results');
+    const grocerySection = document.getElementById('grocery');
+    const feedbackSection = document.getElementById('feedback');
+
+    startQuizButton.onclick = () => {
+        document.querySelector('.welcome').style.display = 'none';
+        quizSection.style.display = 'block';
+    };
+
+    const submitQuizButton = document.getElementById('submit-quiz');
+    submitQuizButton.onclick = () => {
+        quizSection.style.display = 'none';
+        resultsSection.style.display = 'block';
+        grocerySection.style.display = 'block'; // Show grocery list on results
+        feedbackSection.style.display = 'block'; // Show feedback section
+    };
+
+    // Feedback submission
+    const submitFeedbackButton = document.getElementById('submit-feedback');
+    submitFeedbackButton.onclick = () => {
+        const feedbackText = document.getElementById('feedback-text').value;
+        if (feedbackText.trim() !== "") {
+            localStorage.setItem('userFeedback', feedbackText);
+            document.getElementById('feedback-response').innerText = "感谢您的反馈！";
+            document.getElementById('feedback-text').value = ''; // Clear the feedback text
+        }
+    };
+
+    // Load feedback from localStorage on page load if exists
+    window.onload = () => {
+        const savedFeedback = localStorage.getItem('userFeedback');
+        if (savedFeedback) {
+            document.getElementById('feedback-response').innerText = "您之前的反馈：" + savedFeedback;
+        }
+    };
+
+    // Async Progress Tracker Function
+    function trackProgress(target) {
+        const progressDiv = document.querySelector('.progress-bar div');
+        let width = 0;
+        const interval = setInterval(() => {
+            if (width >= target) {
+                clearInterval(interval);
+            } else {
+                width++;
+                progressDiv.style.width = width + '%';
+            }
+        }, 30); // Adjust for desired speed
+    }
+
+    // Call progress tracking function
+    trackProgress(80); // Example to show progress to 80%
+</script>
+
+</body>
+</html>
