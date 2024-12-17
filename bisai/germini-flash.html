@@ -1,0 +1,468 @@
+
+<html><head><base href="https://websim.ai/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Panda Diet App</title><style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f7f7;
+        color: #333;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      h1, h2 {
+        color: #2c3e50;
+        text-align: center;
+      }
+      button {
+        display: block;
+        margin: 20px auto;
+        padding: 12px 24px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #2980b9;
+      }
+      .quiz-question {
+        margin-bottom: 20px;
+      }
+      .quiz-options label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      .dashboard-section {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+      }
+      .meal-plan {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        flex-wrap: wrap;
+      }
+      .meal {
+         text-align: center;
+         margin-bottom: 10px;
+         background-color: #fff;
+         padding: 10px;
+         border: 1px solid #eee;
+        border-radius: 5px;
+      }
+      .meal img {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+      }
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background-color: #ddd;
+        border-radius: 10px;
+        margin-top: 10px;
+      }
+       .progress-fill {
+        height: 100%;
+        background-color: #2ecc71;
+        border-radius: 10px;
+        transition: width 0.5s ease;
+      }
+      .quick-actions {
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          margin-top: 20px;
+
+      }
+      .quick-actions button {
+        padding: 10px 15px;
+        margin: 5px;
+        background-color: #3498db;
+      }
+      .recipes-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      .recipe-card {
+        width: 200px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin: 10px;
+        overflow: hidden;
+        background-color: #fff;
+      }
+      .recipe-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+       .recipe-card-content {
+          padding: 10px;
+       }
+       .grocery-list-container {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+       .progress-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+      }
+       .progress-chart {
+        width: 300px;
+        height: 200px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #888;
+
+      }
+       .food-log-container {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        background-color: #fff;
+        }
+        .food-log-input {
+          display: block;
+          margin-bottom: 10px;
+        }
+        .food-log-input input {
+           padding: 8px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           margin-right: 10px;
+        }
+       .food-log-totals {
+           margin-top: 15px;
+           text-align: right;
+        }
+        .educational-content-container {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+      .educational-content-article {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .educational-content-video {
+          margin-bottom: 20px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .educational-content-video iframe {
+          max-width: 100%;
+          max-height: 250px;
+      }
+    .panda-svg {
+          display: block;
+           margin: 20px auto;
+      }
+      .diet-type-display {
+         text-align: center;
+         font-size: 1.5em;
+         margin: 10px 0;
+         font-weight: bold;
+      }
+      .community-section {
+          margin-top: 20px;
+          padding: 15px;
+          border: 1px solid #eee;
+          border-radius: 5px;
+          background-color: #f0f0f0;
+      }
+      .community-post {
+           margin-bottom: 15px;
+           padding: 10px;
+           border: 1px solid #ddd;
+           border-radius: 5px;
+           background-color: #fff;
+      }
+      .community-post p {
+        margin: 5px 0;
+      }
+      .community-post .post-meta {
+          font-style: italic;
+          color: #888;
+      }
+    .article-card {
+        width: 250px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin: 10px;
+        overflow: hidden;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+      }
+      .article-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+       .article-card-content {
+          padding: 10px;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+       }
+      .article-card-content p {
+          margin-bottom: 10px;
+      }
+      .article-card-content .read-more-btn {
+          align-self: flex-start;
+          padding: 8px 12px;
+           background-color: #3498db;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+       .article-card-content .read-more-btn:hover {
+            background-color: #2980b9;
+        }
+        .article-list {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: space-around;
+        }
+        .nutrient-tracker-container {
+            margin-top: 20px;
+           padding: 15px;
+           border: 1px solid #eee;
+           border-radius: 5px;
+           background-color: #fff;
+        }
+         .nutrient-input {
+             display: flex;
+             margin-bottom: 10px;
+        }
+         .nutrient-input label {
+            margin-right: 10px;
+        }
+         .nutrient-input input, .nutrient-input select {
+             padding: 8px;
+             border: 1px solid #ccc;
+            border-radius: 5px;
+         }
+          .nutrient-totals {
+             margin-top: 15px;
+            text-align: right;
+        }
+         .nutrient-results {
+             margin-top: 15px;
+         }
+    </style></head><body><div class="container"><h1>熊猫饮食 (Panda Diet)</h1><div id="app-content"><div id="welcome-screen"><img class="panda-svg" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3Ccircle cx='30' cy='35' r='8' fill='%23000'/%3E%3Ccircle cx='70' cy='35' r='8' fill='%23000'/%3E%3Cpath d='M35 60 q 10 15 30 0' stroke='%23000' stroke-width='2' fill='none'/%3E%3C/svg%3E" alt="Panda illustration"><p>Welcome to 熊猫饮食! Let us guide you to a healthier you through personalized dietary plans.</p><button onclick="showQuiz()">开始体验 (Start the Experience)</button></div><div id="quiz-screen" style="display: none;"><h2 style="margin-bottom: 20px;">Personalized Diet Quiz</h2><div class="quiz-question"><p>How do you generally feel in the mornings?</p><div class="quiz-options"><label><input type="radio" name="morning-feel" value="energized"> Energized</label><label><input type="radio" name="morning-feel" value="sluggish"> Sluggish</label><label><input type="radio" name="morning-feel" value="neutral"> Neutral</label></div></div><div class="quiz-question"><p>What type of food do you crave most?</p><div class="quiz-options"><label><input type="radio" name="food-craving" value="savory"> Savory</label><label><input type="radio" name="food-craving" value="sweet"> Sweet</label><label><input type="radio" name="food-craving" value="spicy"> Spicy</label></div></div><div class="quiz-question"><p>How do you handle stress?</p><div class="quiz-options"><label><input type="radio" name="stress-handle" value="exercise"> Exercise</label><label><input type="radio" name="stress-handle" value="eat"> Eat</label><label><input type="radio" name="stress-handle" value="meditate"> Meditate</label></div></div><div class="quiz-question"><p>What's your preferred pace of life?</p><div class="quiz-options"><label><input type="radio" name="life-pace" value="fast-paced"> Fast-paced</label><label><input type="radio" name="life-pace" value="balanced"> Balanced</label><label><input type="radio" name="life-pace" value="slow-paced"> Slow-paced</label></div></div><button onclick="showDietProfile()">Submit &amp; Get Profile</button></div><div id="diet-profile-screen" style="display: none;"><h2>Your Dietary Profile</h2><p id="diet-profile-text"></p><button onclick="showDashboard()">Continue to Dashboard</button></div><div id="dashboard-screen" style="display: none;"><h2>Dashboard</h2><div class="dashboard-section"><h3 style="text-align: center;">Current Dietary Category:</h3><p id="diet-type-display" class="diet-type-display"></p></div><div class="dashboard-section"><h3>Today's Meal Plan</h3><div class="meal-plan"><div class="meal"><h4>Breakfast</h4><img src="https://placehold.co/80x80/43A047/ffffff?text=B" alt="Breakfast"></div><div class="meal"><h4>Lunch</h4><img src="https://placehold.co/80x80/1E88E5/ffffff?text=L" alt="Lunch"></div><div class="meal"><h4>Dinner</h4><img src="https://placehold.co/80x80/D81B60/ffffff?text=D" alt="Dinner"></div></div></div><div class="dashboard-section"><h3>Progress Tracker</h3><div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width: 40%;"></div></div></div><div class="dashboard-section"><h3>Quick Actions</h3><div class="quick-actions"><button onclick="showFoodLog()">Log Food</button><button onclick="showRecipes()">View Recipes</button><button onclick="showGroceryList()">Check Grocery List</button><button onclick="showEducationalContent()">Educational Content</button><button onclick="showCommunity()">Community</button><button onclick="showNutrientTracker()">Track Nutrients</button></div></div></div><div id="meal-planner-screen" style="display: none;"><h2>Meal Planner</h2><div class="meal-plan"><div class="meal"><h4>Monday</h4><p><a href="#recipe1">Breakfast Recipe</a></p><p><a href="#recipe2">Lunch Recipe</a></p><p><a href="#recipe3">Dinner Recipe</a></p></div><div class="meal"><h4>Tuesday</h4><p><a href="#recipe1">Breakfast Recipe</a></p><p><a href="#recipe2">Lunch Recipe</a></p><p><a href="#recipe3">Dinner Recipe</a></p></div><div class="meal"><h4>Wednesday</h4><p><a href="#recipe1">Breakfast Recipe</a></p><p><a href="#recipe2">Lunch Recipe</a></p><p><a href="#recipe3">Dinner Recipe</a></p></div><div class="meal"><h4>Thursday</h4><p><a href="#recipe1">Breakfast Recipe</a></p><p><a href="#recipe2">Lunch Recipe</a></p><p><a href="#recipe3">Dinner Recipe</a></p></div><div class="meal"><h4>Friday</h4><p><a href="#recipe1">Breakfast Recipe</a></p><p><a href="#recipe2">Lunch Recipe</a></p><p><a href="#recipe3">Dinner Recipe</a></p></div><div class="meal"><h4>Saturday</h4><p><a href="#recipe1">Breakfast Recipe</a></p><p><a href="#recipe2">Lunch Recipe</a></p><p><a href="#recipe3">Dinner Recipe</a></p></div><div class="meal"><h4>Sunday</h4><p><a href="#recipe1">Breakfast Recipe</a></p><p><a href="#recipe2">Lunch Recipe</a></p><p><a href="#recipe3">Dinner Recipe</a></p></div></div></div><div id="recipes-screen" style="display: none;"><h2>Recipes</h2><div class="recipes-list"><div class="recipe-card"><img src="https://placehold.co/200x150/E53935/ffffff?text=Recipe1" alt="Recipe 1"><div class="recipe-card-content"><h3>Recipe 1</h3><p>Prep time: 20 min</p><p>Difficulty: Easy</p><button onclick="addToGroceryList('Recipe 1')">Add to Shopping List</button></div></div><div class="recipe-card"><img src="https://placehold.co/200x150/388E3C/ffffff?text=Recipe2" alt="Recipe 2"><div class="recipe-card-content"><h3>Recipe 2</h3><p>Prep time: 30 min</p><p>Difficulty: Medium</p><button onclick="addToGroceryList('Recipe 2')">Add to Shopping List</button></div></div><div class="recipe-card"><img src="https://placehold.co/200x150/00ACC1/ffffff?text=Recipe3" alt="Recipe 3"><div class="recipe-card-content"><h3>Recipe 3</h3><p>Prep time: 40 min</p><p>Difficulty: Hard</p><button onclick="addToGroceryList('Recipe 3')">Add to Shopping List</button></div></div></div></div><div id="food-log-screen" style="display: none;"><h2>Food Log</h2><div class="food-log-container"><div class="food-log-input"><label for="food-item">Food Item:</label><input type="text" id="food-item" placeholder="Enter food item"><label for="food-calories">Calories:</label><input type="number" id="food-calories" placeholder="Enter calories"><button onclick="logFood()">Log Food</button></div><div class="food-log-totals">Total Calories: <span id="total-calories">0</span></div></div></div><div id="grocery-list-screen" style="display: none;"><h2>Grocery List</h2><div class="grocery-list-container"><ul id="grocery-list"></ul></div></div><div id="progress-screen" style="display: none;"><h2>Progress</h2><div class="progress-section"><h3>Weight Loss Progress</h3><div class="progress-chart">Weight Loss is a marathon, not a sprint!</div></div></div><div id="educational-content-screen" style="display: none;"><h2>Educational Content</h2><div class="educational-content-container"><div class="educational-content-article"><h3>Understanding Your Dietary Type</h3><p>Discover how your unique dietary profile affects your well-being and learn to optimize your diet for overall health.</p></div><div class="educational-content-video"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe></div><div class="article-list"><div class="article-card"><img src="https://placehold.co/250x150/2E7D32/ffffff?text=Article1" alt="Article 1"><div class="article-card-content"><h3>Article 1</h3><p>The importance of balanced meals.</p><button class="read-more-btn" onclick="alert('Read more about Article 1.')">Read More</button></div></div><div class="article-card"><img src="https://placehold.co/250x150/FF8F00/ffffff?text=Article2" alt="Article 2"><div class="article-card-content"><h3>Article 2</h3><p>Effective ways to track your progress.</p><button class="read-more-btn" onclick="alert('Read more about Article 2.')">Read More</button></div></div></div></div></div><div id="community-screen" style="display: none;"><h2>Community Forum</h2><div class="community-section"><div class="community-post"><p>I just started using the app and I'm feeling great!</p><div class="post-meta">Posted by: User123</div></div><div class="community-post"><p>Any tips for the first week?</p><div class="post-meta">Posted by: PandaLover</div></div><div class="community-post"><p>I'm a bit confused about my dietary profile, can anyone help?</p><div class="post-meta">Posted by: ConfusedPanda</div></div></div></div><div id="nutrient-tracker-screen" style="display: none;"><h2>Nutrient Tracker</h2><div class="nutrient-tracker-container"><div class="nutrient-input"><label for="nutrient-type">Nutrient:</label><select id="nutrient-type"><option value="calories">Calories</option><option value="protein">Protein (g)</option><option value="carbs">Carbs (g)</option><option value="fat">Fat (g)</option></select><label for="nutrient-amount">Amount:</label><input type="number" id="nutrient-amount" placeholder="Enter Amount"><button onclick="trackNutrient()">Track</button></div><div class="nutrient-totals">Total Calories: <span id="total-nutrient-calories">0</span></div><div class="nutrient-results"><p id="nutrient-results-text"></p></div></div></div></div><script>
+      let userDietaryType = '';
+      const dietaryTypes = {
+        balanced: "Balanced Earth",
+        energetic: "Energetic Fire",
+        creative: "Creative Wood",
+        intuitive: "Intuitive Water",
+        focused: "Focused Metal"
+      }
+      let groceryItems = [];
+      let loggedCalories = 0;
+    let loggedNutrients = {
+        calories: 0,
+        protein: 0,
+        carbs: 0,
+        fat: 0
+    };
+
+      function showQuiz() {
+        document.getElementById('welcome-screen').style.display = 'none';
+        document.getElementById('quiz-screen').style.display = 'block';
+      }
+
+      async function showDietProfile() {
+          document.getElementById('quiz-screen').style.display = 'none';
+          const morningFeel = document.querySelector('input[name="morning-feel"]:checked')?.value;
+          const foodCraving = document.querySelector('input[name="food-craving"]:checked')?.value;
+          const stressHandle = document.querySelector('input[name="stress-handle"]:checked')?.value;
+          const lifePace = document.querySelector('input[name="life-pace"]:checked')?.value;
+
+
+          let aiPrompt = `Given the user's responses to the following questions,
+          determine the most suitable dietary type. Respond with the dietary type
+          as a single string.
+
+          Here are the questions:
+          - How do you generally feel in the mornings? options are: energized, sluggish, neutral
+          - What type of food do you crave most? options are: savory, sweet, spicy
+          - How do you handle stress? options are: exercise, eat, meditate
+          - What's your preferred pace of life? options are: fast-paced, balanced, slow-paced
+
+          The user responded with the following:
+          - Morning Feel: ${morningFeel}
+          - Food Craving: ${foodCraving}
+          - Stress Handle: ${stressHandle}
+          - Life Pace: ${lifePace}
+
+          The dietary type should be one of:
+           - Balanced Earth
+           - Energetic Fire
+           - Creative Wood
+           - Intuitive Water
+           - Focused Metal
+          `
+          const response = await fetch('/api/ai_completion', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+              },
+              body: JSON.stringify({
+                prompt: aiPrompt,
+              }),
+          });
+
+          const data = await response.text();
+          userDietaryType = data.trim();
+          console.log(userDietaryType);
+          let profileText = "";
+           if (userDietaryType.includes(dietaryTypes.balanced)) {
+                profileText = "You have a Balanced Earth profile! You appreciate stability and grounding, and benefit from a balanced diet.";
+           } else if (userDietaryType.includes(dietaryTypes.energetic)) {
+               profileText = "You have an Energetic Fire profile! You're full of passion and movement, and need foods that support your high energy.";
+           } else if (userDietaryType.includes(dietaryTypes.creative)) {
+                 profileText = "You have a Creative Wood profile! You value growth and flexibility, and thrive on diverse and light foods.";
+           } else if (userDietaryType.includes(dietaryTypes.intuitive)) {
+                profileText = "You have an Intuitive Water profile! You are calm and reflective, and benefit from foods that are nourishing and comforting."
+           } else if (userDietaryType.includes(dietaryTypes.focused)) {
+                profileText = "You have a Focused Metal profile! You love precision and order, and do best with simple and lean protein.";
+           } else {
+              profileText = "Could not determine your profile, please try again later.";
+           }
+
+          document.getElementById('diet-profile-text').textContent = profileText;
+          document.getElementById('diet-profile-screen').style.display = 'block';
+      }
+
+      function showDashboard() {
+           document.getElementById('diet-profile-screen').style.display = 'none';
+            document.getElementById('dashboard-screen').style.display = 'block';
+            document.getElementById('diet-type-display').textContent = userDietaryType;
+
+      }
+
+      function showMealPlanner() {
+        document.getElementById('dashboard-screen').style.display = 'none';
+        document.getElementById('meal-planner-screen').style.display = 'block';
+      }
+      function showRecipes() {
+          document.getElementById('dashboard-screen').style.display = 'none';
+        document.getElementById('recipes-screen').style.display = 'block';
+      }
+      function showFoodLog() {
+          document.getElementById('dashboard-screen').style.display = 'none';
+         document.getElementById('food-log-screen').style.display = 'block';
+      }
+     function showGroceryList() {
+          document.getElementById('dashboard-screen').style.display = 'none';
+          document.getElementById('grocery-list-screen').style.display = 'block';
+           updateGroceryListDisplay();
+      }
+     function showProgress() {
+          document.getElementById('dashboard-screen').style.display = 'none';
+          document.getElementById('progress-screen').style.display = 'block';
+      }
+      function showEducationalContent() {
+         document.getElementById('dashboard-screen').style.display = 'none';
+          document.getElementById('educational-content-screen').style.display = 'block';
+      }
+     function showCommunity() {
+          document.getElementById('dashboard-screen').style.display = 'none';
+          document.getElementById('community-screen').style.display = 'block';
+      }
+    function showNutrientTracker() {
+           document.getElementById('dashboard-screen').style.display = 'none';
+           document.getElementById('nutrient-tracker-screen').style.display = 'block';
+      }
+       function logFood() {
+          const foodItem = document.getElementById('food-item').value;
+          const foodCalories = parseInt(document.getElementById('food-calories').value, 10);
+          if (foodItem && !isNaN(foodCalories)) {
+             loggedCalories += foodCalories;
+             document.getElementById('total-calories').textContent = loggedCalories;
+             document.getElementById('food-item').value = '';
+             document.getElementById('food-calories').value = '';
+         }
+       }
+    function trackNutrient() {
+            const nutrientType = document.getElementById('nutrient-type').value;
+            const nutrientAmount = parseFloat(document.getElementById('nutrient-amount').value);
+
+            if (!isNaN(nutrientAmount)) {
+                loggedNutrients[nutrientType] += nutrientAmount;
+                document.getElementById('total-nutrient-calories').textContent = loggedNutrients.calories;
+                document.getElementById('nutrient-amount').value = '';
+
+                 let resultsText = `Tracked: `;
+                 for (const key in loggedNutrients) {
+                   resultsText += `${key}: ${loggedNutrients[key]}  `;
+                 }
+                document.getElementById('nutrient-results-text').textContent = resultsText;
+            }
+        }
+
+      function addToGroceryList(recipeName) {
+        groceryItems.push(recipeName);
+        updateGroceryListDisplay();
+      }
+
+      function updateGroceryListDisplay() {
+            const groceryListElement = document.getElementById('grocery-list');
+            groceryListElement.innerHTML = '';
+              groceryItems.forEach(item => {
+                  const listItem = document.createElement('li');
+                  listItem.textContent = item;
+                  groceryListElement.appendChild(listItem);
+              });
+        }
+    </script></div></body></html>
