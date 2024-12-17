@@ -1,0 +1,182 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Plan</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #58b291;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    nav {
+      text-align: center;
+      background-color: #f2f2f2;
+      padding: 10px 0;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      margin: 0 15px;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      color: #58b291;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .meal-plan {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .meal-card {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      position: relative;
+    }
+
+    .meal-card h3 {
+      font-size: 1.4rem;
+      color: #58b291;
+      margin-bottom: 10px;
+    }
+
+    .meal-card p {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .meal-card a {
+      text-decoration: none;
+      color: white;
+      background-color: #58b291;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      border-radius: 5px;
+      transition: 0.3s ease;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+    }
+
+    .meal-card a:hover {
+      background-color: #4a9573;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background-color: #f2f2f2;
+      color: #555;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: #58b291;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Weekly Meal Plan</h1>
+  </header>
+
+  <nav>
+    <a href="https://example.com/dashboard">Dashboard</a>
+    <a href="https://example.com/meal-plan">Meal Plan</a>
+    <a href="https://example.com/add-meal">Add Meal</a>
+    <a href="https://example.com/settings">Settings</a>
+  </nav>
+
+  <main>
+    <h2>Meals for the Week</h2>
+    <div class="meal-plan">
+      <div class="meal-card">
+        <h3>Monday</h3>
+        <p><strong>Breakfast:</strong> Avocado Toast</p>
+        <p><strong>Calories:</strong> 240</p>
+        <a href="https://example.com/edit-meal?mealId=1">Edit</a>
+      </div>
+      <div class="meal-card">
+        <h3>Tuesday</h3>
+        <p><strong>Lunch:</strong> Chicken Caesar Salad</p>
+        <p><strong>Calories:</strong> 350</p>
+        <a href="https://example.com/edit-meal?mealId=2">Edit</a>
+      </div>
+      <div class="meal-card">
+        <h3>Wednesday</h3>
+        <p><strong>Dinner:</strong> Grilled Salmon with Vegetables</p>
+        <p><strong>Calories:</strong> 400</p>
+        <a href="https://example.com/edit-meal?mealId=3">Edit</a>
+      </div>
+      <div class="meal-card">
+        <h3>Thursday</h3>
+        <p><strong>Snack:</strong> Fruit Smoothie</p>
+        <p><strong>Calories:</strong> 180</p>
+        <a href="https://example.com/edit-meal?mealId=4">Edit</a>
+      </div>
+      <div class="meal-card">
+        <h3>Friday</h3>
+        <p><strong>Dinner:</strong> Spaghetti Carbonara</p>
+        <p><strong>Calories:</strong> 550</p>
+        <a href="https://example.com/edit-meal?mealId=5">Edit</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Meal Planner. Stay Nourished, Stay Healthy.</p>
+    <p><a href="https://example.com/support">Contact Support</a></p>
+  </footer>
+</body>
+</html>
