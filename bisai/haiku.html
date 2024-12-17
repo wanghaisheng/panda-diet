@@ -1,0 +1,359 @@
+
+<html><head><base href="https://app.websim.ai/panda-diet-dashboard">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熊猫饮食 Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #81c784;
+            --light-background: #f9f9f9;
+            --panda-brown: #795548;
+            --soft-green: #e0f7fa;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --card-background: white;
+        }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--light-background);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .dashboard-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: var(--primary-green);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        .dashboard-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .dietary-category {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .category-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: var(--primary-green);
+        }
+        .meal-plan {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .meal-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .progress-tracker {
+            display: flex;
+            justify-content: space-between;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--primary-green);
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .action-button {
+            background-color: var(--soft-green);
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .action-button:hover {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        .action-button i {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+        .action-button:hover i {
+            color: white;
+        }
+        .nutrition-insights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .nutrition-chart {
+            height: 250px;
+        }
+        .wellness-tips {
+            background-color: var(--soft-green);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .wellness-tip {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .wellness-tip i {
+            margin-right: 10px;
+            color: var(--primary-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="user-profile">
+                <div class="user-avatar">李</div>
+                <div>
+                    <h2>李明</h2>
+                    <p>平衡地球型饮食</p>
+                </div>
+            </div>
+            <div>
+                <button class="action-button" style="display: inline-block; padding: 10px 15px;">
+                    <i class="bi bi-gear"></i>设置
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-card dietary-category">
+            <div style="display: flex; align-items: center;">
+                <i class="bi bi-tree category-icon"></i>
+                <div>
+                    <h3>平衡地球型饮食</h3>
+                    <p>稳定、平和、注重营养平衡</p>
+                </div>
+            </div>
+            <button class="action-button" style="display: inline-block; padding: 10px 15px;">
+                了解更多
+            </button>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>今日餐饮计划</h3>
+            <div class="meal-plan">
+                <div class="meal-card">
+                    <h4>早餐</h4>
+                    <p>全麦吐司 + 鸡蛋 + 水果沙拉</p>
+                </div>
+                <div class="meal-card">
+                    <h4>午餐</h4>
+                    <p>藜麦蔬菜沙拉 + 鸡胸肉</p>
+                </div>
+                <div class="meal-card">
+                    <h4>晚餐</h4>
+                    <p>蒸鱼 + 蒸蔬菜 + 糙米</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>进度追踪</h3>
+            <div class="progress-tracker">
+                <div style="width: 30%; text-align: center;">
+                    <p>体重管理</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 65%;"></div>
+                    </div>
+                    <small>65% (已减重3公斤)</small>
+                </div>
+                <div style="width: 30%; text-align: center;">
+                    <p>能量水平</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 75%;"></div>
+                    </div>
+                    <small>75% (感觉良好)</small>
+                </div>
+                <div style="width: 30%; text-align: center;">
+                    <p>饮食多样性</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 55%;"></div>
+                    </div>
+                    <small>55% (继续努力)</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>快捷操作</h3>
+            <div class="quick-actions">
+                <div class="action-button">
+                    <i class="bi bi-journals"></i>
+                    记录饮食
+                </div>
+                <div class="action-button">
+                    <i class="bi bi-book"></i>
+                    食谱推荐
+                </div>
+                <div class="action-button">
+                    <i class="bi bi-cart"></i>
+                    购物清单
+                </div>
+                <div class="action-button">
+                    <i class="bi bi-graph-up"></i>
+                    进度报告
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card nutrition-insights">
+            <div>
+                <h3>营养摄入分析</h3>
+                <canvas id="nutritionChart" class="nutrition-chart"></canvas>
+            </div>
+            <div>
+                <h3>每日推荐</h3>
+                <div class="wellness-tips">
+                    <div class="wellness-tip">
+                        <i class="bi bi-droplet"></i>
+                        多喝水，建议每天2升
+                    </div>
+                    <div class="wellness-tip">
+                        <i class="bi bi-egg"></i>
+                        蛋白质摄入充足
+                    </div>
+                    <div class="wellness-tip">
+                        <i class="bi bi-heart-pulse"></i>
+                        保持适度运动
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>本周目标</h3>
+            <div class="progress-tracker">
+                <div style="width: 25%; text-align: center;">
+                    <p>运动时间</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 80%;"></div>
+                    </div>
+                    <small>80% (已完成4小时)</small>
+                </div>
+                <div style="width: 25%; text-align: center;">
+                    <p>水分摄入</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 70%;"></div>
+                    </div>
+                    <small>70% (14杯/20杯)</small>
+                </div>
+                <div style="width: 25%; text-align: center;">
+                    <p>冥想时间</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 60%;"></div>
+                    </div>
+                    <small>60% (30分钟/1小时)</small>
+                </div>
+                <div style="width: 25%; text-align: center;">
+                    <p>睡眠质量</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 90%;"></div>
+                    </div>
+                    <small>90% (质量良好)</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        document.querySelectorAll('.quick-actions .action-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonText = this.textContent.trim();
+                switch(buttonText) {
+                    case '记录饮食':
+                        alert('食物日志功能即将推出');
+                        break;
+                    case '食谱推荐':
+                        alert('个性化食谱推荐正在开发中');
+                        break;
+                    case '购物清单':
+                        alert('智能购物清单功能即将上线');
+                        break;
+                    case '进度报告':
+                        alert('详细进度报告功能准备中');
+                        break;
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('nutritionChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['碳水化合物', '蛋白质', '脂肪'],
+                    datasets: [{
+                        data: [45, 30, 25],
+                        backgroundColor: [
+                            'rgba(129, 199, 132, 0.8)', 
+                            'rgba(76, 175, 80, 0.8)', 
+                            'rgba(224, 247, 250, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: '每日营养比例'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
