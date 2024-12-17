@@ -1,0 +1,200 @@
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>熊猫饮食 - 个性化报告</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f7f9fc, #eaf7f1);
+      color: #333;
+    }
+
+    header {
+      background-color: #58b291;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 1.8em;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+      text-align: center;
+      color: #465a46;
+      margin-bottom: 20px;
+    }
+
+    .report-section {
+      margin-bottom: 30px;
+    }
+
+    .report-section .element-header {
+      display: flex;
+      align-items: center;
+      background: #f8fcf9;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: 1px solid #e1ebe4;
+    }
+
+    .report-section svg {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      fill: #58b291;
+    }
+
+    .report-section h3 {
+      font-size: 1.5em;
+      color: #465a46;
+    }
+
+    .report-body {
+      margin-top: 15px;
+      padding: 15px;
+      background: #fefefe;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .report-body p {
+      font-size: 1em;
+      color: #606060;
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      position: relative;
+      background: #e1ebe4;
+      border-radius: 20px;
+      height: 20px;
+      margin-top: 10px;
+    }
+
+    .progress-bar::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-radius: 20px;
+      background-color: #58b291;
+      width: var(--progress, 50%);
+      transition: width 0.5s ease;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>个性化报告</h1>
+    <p>根据五行特质，更好地理解和优化您的饮食习惯</p>
+  </header>
+
+  <main>
+    <h2>您的五行个性展现</h2>
+
+    <div class="report-section">
+      <div class="element-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 2a10 10 0 00-10 10 10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2zm0 2a8 8 0 018 8 8 8 0 01-8 8 8 8 0 01-8-8 8 8 0 018-8z"/>
+        </svg>
+        <h3>木 (Wood)</h3>
+      </div>
+      <div class="report-body">
+        <p>您充满活力，喜欢冒险。木元素性格通常倾向于喜欢绿色蔬菜、健康饮品。</p>
+        <p><strong>推荐饮食：</strong> 新鲜水果、蒸青菜、浓绿茶。</p>
+        <div class="progress-bar" style="--progress: 70%;"></div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <div class="element-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 12a2 2 0 112-2 2 2 0 01-2 2z"/>
+        </svg>
+        <h3>火 (Fire)</h3>
+      </div>
+      <div class="report-body">
+        <p>您热情如火，对生活充满激情。火元素性格的人喜欢辛辣或刺激性的食物。</p>
+        <p><strong>推荐饮食：</strong> 香料丰富的菜肴、小辣椒、暖汤。</p>
+        <div class="progress-bar" style="--progress: 60%;"></div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <div class="element-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 22a10 10 0 01-7.07-2.93A10 10 0 0112 2a10 10 0 017.07 17.07A10 10 0 0112 22zm0-18a8 8 0 10.01 16.01A8 8 0 0012 4z"/>
+        </svg>
+        <h3>土 (Earth)</h3>
+      </div>
+      <div class="report-body">
+        <p>您为人踏实，生活节奏缓慢。土属性的人更倾向于甜味食品和舒适的家的感觉。</p>
+        <p><strong>推荐饮食：</strong> 红薯、南瓜、谷类食品。</p>
+        <div class="progress-bar" style="--progress: 80%;"></div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <div class="element-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M18 10h-4a2 2 0 100 4h4a2 2 0 100-4zm-4 4H6a2 2 0 100 4h8a2 2 0 100-4zm0-8H6a2 2 0 100 4h8a2 2 0 100-4z"/>
+        </svg>
+        <h3>金 (Metal)</h3>
+      </div>
+      <div class="report-body">
+        <p>冷静、自律是您的特点。您更倾向于简单、干净的饮食品质。</p>
+        <p><strong>推荐饮食：</strong> 白煮鸡蛋、豆腐、清汤。</p>
+        <div class="progress-bar" style="--progress: 90%;"></div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <div class="element-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <h3>水 (Water)</h3>
+      </div>
+      <div class="report-body">
+        <p>思想深邃，充满创造力。水性的人适合滋润的软性食物。</p>
+        <p><strong>推荐饮食：</strong> 海鲜、冬瓜汤、燕麦粥。</p>
+        <div class="progress-bar" style="--progress: 65%;"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2023 熊猫饮食. 保留所有权利.
+  </footer>
+</body>
+</html>
