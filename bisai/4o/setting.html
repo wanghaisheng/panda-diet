@@ -1,0 +1,194 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <style>
+    /* General Styling */
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    header {
+      background-color: #35424a;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    nav {
+      background-color: #e8e8e8;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      margin: 0 15px;
+      font-size: 1.2rem;
+    }
+
+    nav a:hover {
+      color: #58b291;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: 20px auto;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      border-left: 5px solid #58b291;
+      padding-left: 10px;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    form .form-group {
+      margin-bottom: 15px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    form button {
+      padding: 10px 15px;
+      background-color: #35424a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #58b291;
+    }
+
+    footer {
+      background-color: #e8e8e8;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #58b291;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Settings</h1>
+  </header>
+
+  <nav>
+    <a href="https://example.com/dashboard">Dashboard</a>
+    <a href="https://example.com/meal-plan">Meal Plan</a>
+    <a href="https://example.com/goals">Goals</a>
+    <a href="https://example.com/settings">Settings</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Account Settings</h2>
+      <form action="https://example.com/settings/save" method="post">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" value="John Doe">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" value="john.doe@example.com">
+        </div>
+        <div class="form-group">
+          <label for="password">New Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter new password">
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Notification Settings</h2>
+      <form action="https://example.com/settings/notifications" method="post">
+        <div class="form-group">
+          <label for="email-notifications">Email Notifications</label>
+          <select id="email-notifications" name="email-notifications">
+            <option value="enabled" selected>Enabled</option>
+            <option value="disabled">Disabled</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sms-notifications">SMS Notifications</label>
+          <select id="sms-notifications" name="sms-notifications">
+            <option value="enabled">Enabled</option>
+            <option value="disabled" selected>Disabled</option>
+          </select>
+        </div>
+        <button type="submit">Update Notifications</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Deactivate Account</h2>
+      <form action="https://example.com/settings/deactivate" method="post">
+        <p>If you deactivate your account, all your data will be temporarily disabled. You can reactivate your account at any time by logging in again.</p>
+        <button type="submit" style="background-color: #c0392b;">Deactivate Account</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Meal Planner Settings. Your personal manager.</p>
+    <p><a href="https://example.com/support">Support</a> | <a href="https://example.com/privacy">Privacy Policy</a></p>
+  </footer>
+</body>
+</html>
