@@ -1,0 +1,230 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Goals</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+    }
+
+    header {
+      background-color: #35424a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #e8e8e8;
+      padding: 10px 0;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    nav a:hover {
+      color: #58b291;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      border-left: 5px solid #58b291;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    .goals-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .goals-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .goals-list li:hover {
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .goal-title {
+      font-size: 1.3rem;
+      color: #333;
+    }
+
+    .goal-progress {
+      display: flex;
+      align-items: center;
+    }
+
+    .progress-bar {
+      width: 100px;
+      height: 10px;
+      background-color: #e8e8e8;
+      border-radius: 5px;
+      margin-right: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background-color: #58b291;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+    }
+
+    .goal-actions a {
+      text-decoration: none;
+      background-color: #58b291;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+
+    .goal-actions a:first-child {
+      margin-right: 10px;
+    }
+
+    .goal-actions a:hover {
+      background-color: #4a9573;
+    }
+
+    footer {
+      text-align: center;
+      color: #555;
+      margin-top: 40px;
+      padding: 20px 0;
+      background-color: #e8e8e8;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #58b291;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Goals</h1>
+  </header>
+
+  <nav>
+    <a href="https://example.com/dashboard">Dashboard</a>
+    <a href="https://example.com/meal-plan">Meal Plan</a>
+    <a href="https://example.com/goals">Goals</a>
+    <a href="https://example.com/settings">Settings</a>
+  </nav>
+
+  <main>
+    <section class="section">
+      <h2>Active Goals</h2>
+      <ul class="goals-list">
+        <li>
+          <span class="goal-title">Consume 2000 calories daily</span>
+          <div class="goal-progress">
+            <div class="progress-bar">
+              <span style="width: 75%;"></span>
+            </div>
+            <span>75%</span>
+          </div>
+          <div class="goal-actions">
+            <a href="https://example.com/goals/edit">Edit</a>
+            <a href="https://example.com/goals/remove">Remove</a>
+          </div>
+        </li>
+        <li>
+          <span class="goal-title">Exercise for 30 minutes daily</span>
+          <div class="goal-progress">
+            <div class="progress-bar">
+              <span style="width: 50%;"></span>
+            </div>
+            <span>50%</span>
+          </div>
+          <div class="goal-actions">
+            <a href="https://example.com/goals/edit">Edit</a>
+            <a href="https://example.com/goals/remove">Remove</a>
+          </div>
+        </li>
+        <li>
+          <span class="goal-title">Drink 8 glasses of water</span>
+          <div class="goal-progress">
+            <div class="progress-bar">
+              <span style="width: 90%;"></span>
+            </div>
+            <span>90%</span>
+          </div>
+          <div class="goal-actions">
+            <a href="https://example.com/goals/edit">Edit</a>
+            <a href="https://example.com/goals/remove">Remove</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Create New Goal</h2>
+      <div class="card">
+        <span>Create a personalized goal and track your progress.</span>
+        <div class="goal-actions">
+          <a href="https://example.com/goals/new">Create Goal</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Meal Planner Goals. Helping you stay on track.</p>
+    <p><a href="https://example.com/support">Contact Support</a> | <a href="https://example.com/privacy">Privacy Policy</a></p>
+  </footer>
+</body>
+</html>
