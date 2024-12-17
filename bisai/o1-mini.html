@@ -1,0 +1,978 @@
+
+<html><head><base href="https://example.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>熊猫饮食 (Panda Diet) App</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      overflow-x: hidden;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* Navigation */
+    nav {
+      width: 100%;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+    }
+    nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4caf50;
+    }
+
+    /* Sections */
+    .section {
+      display: none;
+      padding: 100px 20px 20px 20px;
+      min-height: 100vh;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .active {
+      display: block;
+    }
+
+    /* Welcome Screen */
+    #welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #fffde7;
+    }
+    #welcome svg {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+    #welcome h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #388e3c;
+      text-align: center;
+    }
+    #welcome p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      text-align: center;
+      max-width: 400px;
+    }
+    #welcome button {
+      background-color: #4caf50;
+      color: white;
+      font-size: 18px;
+      transition: background-color 0.3s;
+    }
+    #welcome button:hover {
+      background-color: #43a047;
+    }
+
+    /* Quiz Screen */
+    #quiz {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #quiz h2 {
+      margin-bottom: 20px;
+      color: #388e3c;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .options {
+      list-style: none;
+    }
+    .options li {
+      margin-bottom: 10px;
+    }
+    .options li label {
+      cursor: pointer;
+      padding: 10px;
+      display: block;
+      background-color: #e8f5e9;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .options li input {
+      margin-right: 10px;
+    }
+    .options li label:hover {
+      background-color: #c8e6c9;
+    }
+    #quiz button {
+      background-color: #4caf50;
+      color: white;
+      font-size: 16px;
+    }
+
+    /* Result Screen */
+    #result {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #fff3e0;
+    }
+    #result svg {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    #result h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #f57c00;
+    }
+    #result p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #result button {
+      background-color: #4caf50;
+      color: white;
+      font-size: 16px;
+    }
+
+    /* Dashboard */
+    #dashboard {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #dashboard h2 {
+      margin-bottom: 20px;
+      color: #388e3c;
+    }
+    .dashboard-card {
+      background-color: #fff;
+      width: 90%;
+      max-width: 800px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .dashboard-card:hover {
+      transform: translateY(-5px);
+    }
+    .dashboard-card h3 {
+      margin-bottom: 10px;
+      color: #4caf50;
+    }
+    .meal-plan, .progress-tracker, .quick-actions {
+      margin-top: 10px;
+    }
+    .quick-actions button {
+      margin: 5px;
+      background-color: #c5e1a5;
+    }
+    .quick-actions button:hover {
+      background-color: #aed581;
+    }
+
+    /* Meal Planner Screen */
+    #mealPlanner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    #mealPlanner h2 {
+      margin-bottom: 20px;
+      color: #388e3c;
+      text-align: center;
+    }
+    .weekly-plan {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .day-plan {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .day-plan h3 {
+      margin-bottom: 10px;
+      color: #4caf50;
+    }
+    .meal-list {
+      list-style: none;
+    }
+    .meal-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .meal-list li a {
+      color: #388e3c;
+      font-weight: bold;
+    }
+    .swap-button {
+      background-color: #c5e1a5;
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 14px;
+    }
+    .swap-button:hover {
+      background-color: #aed581;
+    }
+
+    /* Food Log Screen */
+    #foodLog h2 {
+      margin-bottom: 20px;
+      color: #388e3c;
+      text-align: center;
+    }
+    #foodLogForm {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .food-entry label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .food-entry input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .logged-food h3 {
+      margin-bottom: 10px;
+      color: #4caf50;
+    }
+    #foodList {
+      list-style: none;
+      margin-bottom: 10px;
+    }
+    #foodList li {
+      padding: 5px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    /* Recipes Screen */
+    #recipes h2 {
+      margin-bottom: 20px;
+      color: #388e3c;
+      text-align: center;
+    }
+    .recipe-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .recipe-item {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .recipe-item h3 {
+      margin-bottom: 10px;
+      color: #4caf50;
+    }
+    .recipe-item p {
+      margin-bottom: 8px;
+    }
+    .recipe-item button {
+      background-color: #4caf50;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+    .recipe-item button:hover {
+      background-color: #43a047;
+    }
+
+    /* Grocery List Screen */
+    #groceryList h2 {
+      margin-bottom: 20px;
+      color: #388e3c;
+      text-align: center;
+    }
+    #groceryItems {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    #groceryItems li {
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+    }
+    #groceryItems li input {
+      margin-right: 10px;
+    }
+
+    /* Educational Content Screen */
+    #educationalContent h2 {
+      margin-bottom: 20px;
+      color: #388e3c;
+      text-align: center;
+    }
+    #educationalContent .content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    #educationalContent article {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    #educationalContent article h3 {
+      margin-bottom: 10px;
+      color: #4caf50;
+    }
+
+    /* Progress Screen */
+    #progress h2 {
+      margin-bottom: 20px;
+      color: #388e3c;
+      text-align: center;
+    }
+    .progress-graphs {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+    .progress-graphs h3 {
+      margin-bottom: 10px;
+      color: #4caf50;
+    }
+    .progress-graphs svg {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">熊猫饮食</div>
+  </nav>
+
+  <!-- Welcome Screen -->
+  <section id="welcome" class="section active">
+    <!-- Panda SVG Illustration -->
+    <svg viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="#a5d6a7"/>
+      <circle cx="22" cy="24" r="6" fill="#fff"/>
+      <circle cx="42" cy="24" r="6" fill="#fff"/>
+      <circle cx="22" cy="24" r="3" fill="#000"/>
+      <circle cx="42" cy="24" r="3" fill="#000"/>
+      <path d="M20 40 q12 12 24 0" stroke="#000" stroke-width="2" fill="none"/>
+    </svg>
+    <h1>欢迎来到 熊猫饮食</h1>
+    <p>通过个性化计划帮助您实现饮食目标</p>
+    <button onclick="navigateTo('quiz')">开始体验</button>
+  </section>
+
+  <!-- Quiz Screen -->
+  <section id="quiz" class="section">
+    <h2>个性化饮食问卷</h2>
+    <form id="quizForm">
+      <div class="question" data-question="1">
+        <p>1. 你早晨通常感觉如何？</p>
+        <ul class="options">
+          <li>
+            <label>
+              <input type="radio" name="q1" value="energized" required>
+              精力充沛
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="sluggish">
+              昏昏欲睡
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q1" value="neutral">
+              中等
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="question" data-question="2" style="display:none;">
+        <p>2. 你最渴望哪种类型的食物？</p>
+        <ul class="options">
+          <li>
+            <label>
+              <input type="radio" name="q2" value="savory" required>
+              咸味
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="sweet">
+              甜味
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q2" value="spicy">
+              辣味
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="question" data-question="3" style="display:none;">
+        <p>3. 你如何处理压力？</p>
+        <ul class="options">
+          <li>
+            <label>
+              <input type="radio" name="q3" value="exercise" required>
+              锻炼
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="eat">
+              吃东西
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q3" value="meditate">
+              冥想
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="question" data-question="4" style="display:none;">
+        <p>4. 你喜欢的生活节奏是？</p>
+        <ul class="options">
+          <li>
+            <label>
+              <input type="radio" name="q4" value="fast-paced" required>
+              快节奏
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q4" value="balanced">
+              平衡
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="q4" value="slow-paced">
+              慢节奏
+            </label>
+          </li>
+        </ul>
+      </div>
+      <button type="button" onclick="nextQuestion()">下一步</button>
+    </form>
+  </section>
+
+  <!-- Result Screen -->
+  <section id="result" class="section">
+    <svg viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="#ffe0b2"/>
+      <path d="M20 40 q12 -15 24 0" stroke="#ff9800" stroke-width="4" fill="none"/>
+      <circle cx="32" cy="22" r="10" fill="#ffcc80"/>
+      <text x="32" y="27" text-anchor="middle" font-size="12" fill="#000">👍</text>
+    </svg>
+    <h2>您的饮食类型：平衡地球</h2>
+    <p>您拥有平衡和稳定的饮食习惯，适合多样化的食物选择，保持健康与活力。</p>
+    <button onclick="navigateTo('dashboard')">进入仪表板</button>
+  </section>
+
+  <!-- Dashboard Screen -->
+  <section id="dashboard" class="section">
+    <h2>仪表板</h2>
+    <div class="dashboard-card">
+      <h3>当前饮食类型</h3>
+      <p>平衡地球</p>
+    </div>
+    <div class="dashboard-card">
+      <h3>今日饮食计划</h3>
+      <div class="meal-plan">
+        <p><strong>早餐:</strong> 燕麦水果碗</p>
+        <p><strong>午餐:</strong> 烤鸡沙拉</p>
+        <p><strong>晚餐:</strong> 三文鱼配蔬菜</p>
+      </div>
+    </div>
+    <div class="dashboard-card">
+      <h3>进度追踪</h3>
+      <div class="progress-tracker">
+        <div style="background-color: #c5e1a5; width: 70%; height: 20px; border-radius: 10px;">
+          <div style="background-color: #4caf50; width: 70%; height: 100%; border-radius: 10px;"></div>
+        </div>
+        <p>目标进度: 70%</p>
+      </div>
+    </div>
+    <div class="dashboard-card">
+      <h3>快速操作</h3>
+      <div class="quick-actions">
+        <button onclick="navigateTo('foodLog')" title="记录食物"><i class="fas fa-utensils"></i></button>
+        <button onclick="navigateTo('recipes')" title="查看食谱"><i class="fas fa-book"></i></button>
+        <button onclick="navigateTo('groceryList')" title="查看购物清单"><i class="fas fa-shopping-cart"></i></button>
+        <button onclick="navigateTo('educationalContent')" title="学习内容"><i class="fas fa-graduation-cap"></i></button>
+        <button onclick="navigateTo('mealPlanner')" title="餐计划"><i class="fas fa-calendar-alt"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meal Planner Screen -->
+  <section id="mealPlanner" class="section">
+    <h2>餐计划</h2>
+    <div class="weekly-plan">
+      <!-- Monday -->
+      <div class="day-plan" data-day="monday">
+        <h3>星期一</h3>
+        <ul class="meal-list">
+          <li>
+            <a href="https://example.com/recipes/oatmeal-fruit-bowl">燕麦水果碗</a>
+            <button class="swap-button" onclick="swapMeal('monday', 'breakfast')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/grilled-chicken-salad">烤鸡沙拉</a>
+            <button class="swap-button" onclick="swapMeal('monday', 'lunch')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/salmon-vegetables">三文鱼配蔬菜</a>
+            <button class="swap-button" onclick="swapMeal('monday', 'dinner')">替换</button>
+          </li>
+        </ul>
+      </div>
+      <!-- Tuesday -->
+      <div class="day-plan" data-day="tuesday">
+        <h3>星期二</h3>
+        <ul class="meal-list">
+          <li>
+            <a href="https://example.com/recipes/oatmeal-fruit-bowl">燕麦水果碗</a>
+            <button class="swap-button" onclick="swapMeal('tuesday', 'breakfast')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/grilled-chicken-salad">烤鸡沙拉</a>
+            <button class="swap-button" onclick="swapMeal('tuesday', 'lunch')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/salmon-vegetables">三文鱼配蔬菜</a>
+            <button class="swap-button" onclick="swapMeal('tuesday', 'dinner')">替换</button>
+          </li>
+        </ul>
+      </div>
+      <!-- Wednesday -->
+      <div class="day-plan" data-day="wednesday">
+        <h3>星期三</h3>
+        <ul class="meal-list">
+          <li>
+            <a href="https://example.com/recipes/oatmeal-fruit-bowl">燕麦水果碗</a>
+            <button class="swap-button" onclick="swapMeal('wednesday', 'breakfast')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/grilled-chicken-salad">烤鸡沙拉</a>
+            <button class="swap-button" onclick="swapMeal('wednesday', 'lunch')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/salmon-vegetables">三文鱼配蔬菜</a>
+            <button class="swap-button" onclick="swapMeal('wednesday', 'dinner')">替换</button>
+          </li>
+        </ul>
+      </div>
+      <!-- Thursday -->
+      <div class="day-plan" data-day="thursday">
+        <h3>星期四</h3>
+        <ul class="meal-list">
+          <li>
+            <a href="https://example.com/recipes/oatmeal-fruit-bowl">燕麦水果碗</a>
+            <button class="swap-button" onclick="swapMeal('thursday', 'breakfast')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/grilled-chicken-salad">烤鸡沙拉</a>
+            <button class="swap-button" onclick="swapMeal('thursday', 'lunch')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/salmon-vegetables">三文鱼配蔬菜</a>
+            <button class="swap-button" onclick="swapMeal('thursday', 'dinner')">替换</button>
+          </li>
+        </ul>
+      </div>
+      <!-- Friday -->
+      <div class="day-plan" data-day="friday">
+        <h3>星期五</h3>
+        <ul class="meal-list">
+          <li>
+            <a href="https://example.com/recipes/oatmeal-fruit-bowl">燕麦水果碗</a>
+            <button class="swap-button" onclick="swapMeal('friday', 'breakfast')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/grilled-chicken-salad">烤鸡沙拉</a>
+            <button class="swap-button" onclick="swapMeal('friday', 'lunch')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/salmon-vegetables">三文鱼配蔬菜</a>
+            <button class="swap-button" onclick="swapMeal('friday', 'dinner')">替换</button>
+          </li>
+        </ul>
+      </div>
+      <!-- Saturday -->
+      <div class="day-plan" data-day="saturday">
+        <h3>星期六</h3>
+        <ul class="meal-list">
+          <li>
+            <a href="https://example.com/recipes/oatmeal-fruit-bowl">燕麦水果碗</a>
+            <button class="swap-button" onclick="swapMeal('saturday', 'breakfast')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/grilled-chicken-salad">烤鸡沙拉</a>
+            <button class="swap-button" onclick="swapMeal('saturday', 'lunch')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/salmon-vegetables">三文鱼配蔬菜</a>
+            <button class="swap-button" onclick="swapMeal('saturday', 'dinner')">替换</button>
+          </li>
+        </ul>
+      </div>
+      <!-- Sunday -->
+      <div class="day-plan" data-day="sunday">
+        <h3>星期日</h3>
+        <ul class="meal-list">
+          <li>
+            <a href="https://example.com/recipes/oatmeal-fruit-bowl">燕麦水果碗</a>
+            <button class="swap-button" onclick="swapMeal('sunday', 'breakfast')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/grilled-chicken-salad">烤鸡沙拉</a>
+            <button class="swap-button" onclick="swapMeal('sunday', 'lunch')">替换</button>
+          </li>
+          <li>
+            <a href="https://example.com/recipes/salmon-vegetables">三文鱼配蔬菜</a>
+            <button class="swap-button" onclick="swapMeal('sunday', 'dinner')">替换</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <button onclick="navigateTo('dashboard')">返回仪表板</button>
+  </section>
+
+  <!-- Food Log Screen -->
+  <section id="foodLog" class="section">
+    <h2>食物记录</h2>
+    <form id="foodLogForm">
+      <div class="food-entry">
+        <label for="foodItem">食物名称:</label>
+        <input type="text" id="foodItem" name="foodItem" required>
+      </div>
+      <div class="food-entry">
+        <label for="calories">卡路里:</label>
+        <input type="number" id="calories" name="calories" required>
+      </div>
+      <button type="submit">记录</button>
+    </form>
+    <div class="logged-food">
+      <h3>今日摄入:</h3>
+      <ul id="foodList">
+        <!-- Logged food items will appear here -->
+      </ul>
+      <p>总卡路里: <span id="totalCalories">0</span> kcal</p>
+      <button onclick="navigateTo('dashboard')">返回仪表板</button>
+    </div>
+  </section>
+
+  <!-- Recipes Screen -->
+  <section id="recipes" class="section">
+    <h2>食谱</h2>
+    <div class="recipe-list">
+      <div class="recipe-item">
+        <h3>燕麦水果碗</h3>
+        <p>准备时间: 10分钟 | 难度: 简单</p>
+        <p>材料: 燕麦, 牛奶, 各种水果</p>
+        <p>步骤: 混合燕麦和牛奶，加入水果即可享用。</p>
+        <p>卡路里: 350 kcal</p>
+        <button onclick="addToGrocery('燕麦, 牛奶, 水果')">添加到购物清单</button>
+      </div>
+      <!-- Additional recipes can be added similarly -->
+    </div>
+    <button onclick="navigateTo('dashboard')">返回仪表板</button>
+  </section>
+
+  <!-- Grocery List Screen -->
+  <section id="groceryList" class="section">
+    <h2>购物清单</h2>
+    <ul id="groceryItems">
+      <!-- Grocery items will appear here -->
+    </ul>
+    <button onclick="navigateTo('dashboard')">返回仪表板</button>
+  </section>
+
+  <!-- Educational Content Screen -->
+  <section id="educationalContent" class="section">
+    <h2>健康饮食知识</h2>
+    <div class="content">
+      <article>
+        <h3>均衡饮食的重要性</h3>
+        <p>均衡的饮食有助于维持身体健康，提供必要的营养素，增强免疫力。</p>
+      </article>
+      <article>
+        <h3>如何有效管理饮食目标</h3>
+        <p>设定可实现的目标，定期监测进度，并根据需要调整饮食计划。</p>
+      </article>
+      <!-- Additional articles and videos can be added -->
+    </div>
+    <button onclick="navigateTo('dashboard')">返回仪表板</button>
+  </section>
+
+  <!-- Progress Screen -->
+  <section id="progress" class="section">
+    <h2>进度</h2>
+    <div class="progress-graphs">
+      <div>
+        <h3>体重变化</h3>
+        <svg width="300" height="200">
+          <rect x="10" y="10" width="50" height="180" fill="#4caf50"></rect>
+          <rect x="80" y="50" width="50" height="140" fill="#4caf50"></rect>
+          <rect x="150" y="80" width="50" height="110" fill="#4caf50"></rect>
+          <rect x="220" y="20" width="50" height="170" fill="#4caf50"></rect>
+        </svg>
+      </div>
+      <div>
+        <h3>能量水平</h3>
+        <svg width="300" height="200">
+          <circle cx="50" cy="50" r="40" stroke="#4caf50" stroke-width="4" fill="none" />
+          <line x1="50" y1="50" x2="90" y2="50" stroke="#4caf50" stroke-width="4" />
+        </svg>
+      </div>
+    </div>
+    <button onclick="navigateTo('dashboard')">返回仪表板</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 熊猫饮食. 版权所有.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function navigateTo(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    // Quiz Navigation
+    let currentQuestion = 1;
+    const totalQuestions = 4;
+
+    function nextQuestion() {
+      const form = document.getElementById('quizForm');
+      const nextQ = currentQuestion + 1;
+      if(currentQuestion < totalQuestions){
+        document.querySelector('.question[data-question="'+currentQuestion+'"]').style.display = 'none';
+        document.querySelector('.question[data-question="'+nextQ+'"]').style.display = 'block';
+        currentQuestion = nextQ;
+        if(currentQuestion === totalQuestions){
+          const btn = form.querySelector('button');
+          btn.textContent = '完成';
+        }
+      } else {
+        // Process Quiz Results
+        const formData = new FormData(form);
+        const answers = {};
+        formData.forEach((value, key) => {
+          answers[key] = value;
+        });
+        // Simple mapping based on answers
+        let category = 'Balanced Earth';
+        if(answers.q1 === 'energized' && answers.q2 === 'spicy') {
+          category = 'Energetic Fire';
+        } else if(answers.q1 === 'sluggish' && answers.q2 === 'sweet') {
+          category = 'Creative Wood';
+        } else if(answers.q1 === 'neutral' && answers.q2 === 'savory') {
+          category = 'Focused Metal';
+        } else {
+          category = 'Intuitive Water';
+        }
+        // Display Result
+        document.getElementById('result').querySelector('h2').textContent = '您的饮食类型：' + category;
+        document.getElementById('result').querySelector('p').textContent = getCategoryDescription(category);
+        updateDashboard(category);
+        navigateTo('result');
+      }
+    }
+
+    function getCategoryDescription(category) {
+      const descriptions = {
+        'Balanced Earth': '您拥有平衡和稳定的饮食习惯，适合多样化的食物选择，保持健康与活力。',
+        'Energetic Fire': '您充满活力，喜欢辛辣和刺激的食物，适合高蛋白饮食以支持您的活力。',
+        'Creative Wood': '您富有创意，偏爱甜食和丰富的食材，适合多样化的营养摄入来激发创意。',
+        'Focused Metal': '您专注且有目标，偏好咸味和简单的食物，适合高纤维饮食帮助保持专注。',
+        'Intuitive Water': '您直觉敏锐，喜欢温和和水润的食物，适合营养均衡的饮食来支持整体健康。'
+      };
+      return descriptions[category] || '';
+    }
+
+    function updateDashboard(category) {
+      // Update Dietary Category
+      const dashboard = document.getElementById('dashboard');
+      dashboard.querySelector('.dashboard-card:nth-child(1) p').textContent = category;
+
+      // Update Today's Meal Plan based on category
+      const mealPlan = document.querySelector('.dashboard-card .meal-plan');
+      mealPlan.innerHTML = getMealPlanForCategory(category);
+
+      // Optionally, update Progress Tracker or other dashboard elements based on category
+    }
+
+    function getMealPlanForCategory(category) {
+      const mealPlans = {
+        'Balanced Earth': `
+          <p><strong>早餐:</strong> 燕麦水果碗</p>
+          <p><strong>午餐:</strong> 烤鸡沙拉</p>
+          <p><strong>晚餐:</strong> 三文鱼配蔬菜</p>
+        `,
+        'Energetic Fire': `
+          <p><strong>早餐:</strong> 蛋白质煎饼</p>
+          <p><strong>午餐:</strong> 辣味牛肉卷</p>
+          <p><strong>晚餐:</strong> 辣椒藜麦沙拉</p>
+        `,
+        'Creative Wood': `
+          <p><strong>早餐:</strong> 草莓奶昔</p>
+          <p><strong>午餐:</strong> 甜椒面包</p>
+          <p><strong>晚餐:</strong> 果仁意大利面</p>
+        `,
+        'Focused Metal': `
+          <p><strong>早餐:</strong> 咸味全麦吐司</p>
+          <p><strong>午餐:</strong> 火鸡三明治</p>
+          <p><strong>晚餐:</strong> 高纤维蔬菜汤</p>
+        `,
+        'Intuitive Water': `
+          <p><strong>早餐:</strong> 蓝莓酸奶碗</p>
+          <p><strong>午餐:</strong> 水果牛油果沙拉</p>
+          <p><strong>晚餐:</strong> 清蒸鱼配藻类</p>
+        `
+      };
+      return mealPlans[category] || '';
+    }
+
+    // Food Log
+    document.getElementById('foodLogForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const foodItem = document.getElementById('foodItem').value;
+      const calories = parseInt(document.getElementById('calories').value);
+      addFoodToList(foodItem, calories);
+      document.getElementById('foodLogForm').reset();
+    });
+
+    function addFoodToList(item, calories) {
+      const foodList = document.getElementById('foodList');
+      const li = document.createElement('li');
+      li.textContent = `${item} - ${calories} kcal`;
+      foodList.appendChild(li);
+      // Update total calories
+      let total = parseInt(document.getElementById('totalCalories').textContent);
+      total += calories;
+      document.getElementById('totalCalories').textContent = total;
+    }
+
+    // Add to Grocery List
+    function addToGrocery(items) {
+      const groceryList = document.getElementById('groceryItems');
+      const itemArray = items.split(',').map(item => item.trim());
+      itemArray.forEach(item => {
+        const li = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `grocery-${item}`;
+        const label = document.createElement('label');
+        label.htmlFor = `grocery-${item}`;
+        label.textContent = item;
+        li.appendChild(checkbox);
+        li.appendChild(label);
+        groceryList.appendChild(li);
+      });
+      alert('已添加到购物清单');
+    }
+
+    // Swap Meal Function
+    function swapMeal(day, mealType) {
+      const newMeal = prompt(`请输入替换的${mealType === 'breakfast' ? '早餐' : mealType === 'lunch' ? '午餐' : '晚餐'}名称:`);
+      if(newMeal) {
+        const dayPlan = document.querySelector(`.day-plan[data-day="${day}"]`);
+        const mealList = dayPlan.querySelector('.meal-list');
+        const mealIndex = mealType === 'breakfast' ? 0 : mealType === 'lunch' ? 1 : 2;
+        const mealItem = mealList.children[mealIndex];
+        const mealLink = mealItem.querySelector('a');
+        mealLink.textContent = newMeal;
+        // Optionally, update href based on newMeal
+        mealLink.href = `https://example.com/recipes/${encodeURIComponent(newMeal)}`;
+      }
+    }
+
+    // JavaScript for Meal Planner - Additional Features
+    // Here you can add functions to dynamically generate meal plans, connect to a database, etc.
+  </script>
+</body>
+</html>
