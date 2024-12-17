@@ -1,0 +1,812 @@
+
+<html><head><base href="/bisai" />
+<style>
+:root {
+  --primary: #40916C;
+  --secondary: #95D5B2; 
+  --accent: #D8F3DC;
+  --text: #081C15;
+  --light: #fafafa;
+  --dark: #2D6A4F;
+  --radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--light);
+  color: var(--text);
+}
+
+.app {
+  max-width: 420px;
+  margin: 0 auto;
+  background: white;
+  min-height: 100vh;
+  position: relative;
+}
+
+.dashboard {
+  display: none;
+  padding: 2rem;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.meal-plan {
+  background: var(--accent);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.meal-plan h2 {
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+.meal-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.meal-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.meal-details h3 {
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.meal-details p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.action-btn {
+  background: var(--secondary);
+  color: var(--dark);
+  border: none;
+  padding: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.action-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.welcome, .quiz, .result {
+  display: none;
+}
+
+.welcome {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(180deg, var(--accent) 0%, white 100%);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-card {
+  background: var(--accent);
+  padding: 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.profile-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+}
+
+.profile-title {
+  font-size: 1.5rem;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+.profile-desc {
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animated-panda {
+  animation: bounce 2s infinite ease-in-out;
+}
+
+/* Adding new styles for progress bar */
+.progress {
+  width: 100%;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  width: 0;
+}
+
+.question {
+  padding: 2rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.option {
+  background: var(--accent);
+  padding: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  background: var(--secondary);
+}
+
+.option.selected {
+  background: var(--primary);
+  color: white;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background: var(--dark);
+}
+
+/* Adding styles for health stats */
+.health-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--accent);
+  padding: 1rem;
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  color: var(--dark);
+  margin: 0.5rem 0;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+/* Water tracking section */
+.water-tracking {
+  background: var(--accent);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.water-progress {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.water-cup {
+  flex: 1;
+  height: 30px;
+  background: white;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.water-cup.filled {
+  background: var(--primary);
+}
+
+/* Add these styles to the existing CSS */
+.meal-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.meal-option {
+  background: var(--accent);
+  padding: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.meal-option:hover {
+  background: var(--secondary);
+}
+
+.meal-option h4 {
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.meal-option p {
+  color: #666;
+  font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Welcome Screen -->
+  <div class="welcome" id="welcome">
+    <div class="profile-card">
+      <div class="profile-icon animated-panda">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="#40916C"/>
+          <circle cx="39" cy="48" r="9" fill="white"/>
+          <circle cx="81" cy="48" r="9" fill="white"/>
+          <path d="M42,75 Q60,90 78,75" stroke="white" fill="none" stroke-width="6"/>
+        </svg>
+      </div>
+      <h1 class="profile-title">探索您的体质类型</h1>
+      <p class="profile-desc">通过简单的问卷了解您的体质特点，获取专属健康建议</p>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+    </div>
+  </div>
+
+  <!-- Quiz Screen -->
+  <div class="quiz" id="quiz">
+    <div class="progress">
+      <div class="progress-bar" id="progress"></div>
+    </div>
+    <div class="question" id="current-question"></div>
+    <div class="nav-buttons">
+      <button class="btn" id="prev-btn" onclick="prevQuestion()">上一题</button>
+      <button class="btn" id="next-btn" onclick="nextQuestion()">下一题</button>
+    </div>
+  </div>
+
+  <!-- Result Screen -->
+  <div class="result" id="result">
+    <div class="profile-card">
+      <div class="profile-icon">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="#40916C"/>
+          <circle cx="39" cy="48" r="9" fill="white"/>
+          <circle cx="81" cy="48" r="9" fill="white"/>
+          <path d="M42,75 Q60,90 78,75" stroke="white" fill="none" stroke-width="6"/>
+        </svg>
+      </div>
+      <h1 class="profile-title">您的体质类型：平衡土型</h1>
+      <p class="profile-desc">根据您的回答，我们为您定制了专属的健康建议和饮食计划。</p>
+      <button class="btn" onclick="startJourney()">开始健康之旅</button>
+    </div>
+  </div>
+
+  <!-- Enhanced Dashboard Screen -->
+  <div class="dashboard" id="dashboard">
+    <div class="profile-header">
+      <div class="avatar">
+        <svg width="40" height="40" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="18" fill="#40916C"/>
+          <circle cx="13" cy="16" r="3" fill="white"/>
+          <circle cx="27" cy="16" r="3" fill="white"/>
+          <path d="M14,25 Q20,30 26,25" stroke="white" fill="none" stroke-width="2"/>
+        </svg>
+      </div>
+      <h2>平衡土型</h2>
+      <p>今天是健康饮食的第1天</p>
+    </div>
+
+    <!-- New Health Stats Section -->
+    <div class="health-stats">
+      <div class="stat-card">
+        <div class="stat-value">1,850</div>
+        <div class="stat-label">卡路里</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">6/8</div>
+        <div class="stat-label">水杯</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">7.5k</div>
+        <div class="stat-label">步数</div>
+      </div>
+    </div>
+
+    <!-- New Water Tracking Section -->
+    <div class="water-tracking">
+      <h2>今日饮水量</h2>
+      <div class="water-progress" id="water-progress">
+        <div class="water-cup filled"></div>
+        <div class="water-cup filled"></div>
+        <div class="water-cup filled"></div>
+        <div class="water-cup filled"></div>
+        <div class="water-cup filled"></div>
+        <div class="water-cup filled"></div>
+        <div class="water-cup"></div>
+        <div class="water-cup"></div>
+      </div>
+    </div>
+
+    <div class="meal-plan">
+      <h2>今日餐点</h2>
+      <div class="meal-card">
+        <div class="meal-icon">🌅</div>
+        <div class="meal-details">
+          <h3>早餐</h3>
+          <p>燕麦粥配坚果和水果</p>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-icon">☀️</div>
+        <div class="meal-details">
+          <h3>午餐</h3>
+          <p>糙米饭配清炒时蔬</p>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-icon">🌙</div>
+        <div class="meal-details">
+          <h3>晚餐</h3>
+          <p>蒸鱼配花菜</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <button class="action-btn" onclick="toggleMealLog()">
+        <span>📝</span>
+        记录饮食
+      </button>
+      <button class="action-btn" onclick="viewProgress()">
+        <span>📊</span>
+        查看进度
+      </button>
+      <button class="action-btn" onclick="browseRecipes()">
+        <span>🥗</span>
+        浏览菜谱
+      </button>
+      <button class="action-btn" onclick="viewShoppingList()">
+        <span>🛒</span>
+        购物清单
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentQuestion = 0;
+const totalQuestions = 4;
+const questions = [
+  {
+    question: "早上醒来时，您通常感觉如何？",
+    options: ["精力充沛", "感觉疲惫", "一般般"]
+  },
+  {
+    question: "您最喜欢哪类食物？",
+    options: ["酸辣可口", "清淡温和", "甜美可口", "咸香可口"]
+  },
+  {
+    question: "遇到压力时，您会如何缓解？",
+    options: ["运动", "吃东西", "冥想", "听音乐"]
+  },
+  {
+    question: "您喜欢什么样的生活节奏？",
+    options: ["快节奏", "平衡有序", "悠闲自在"]
+  }
+];
+
+let waterCount = 6;
+
+let dailyStats = {
+  calories: {
+    goal: 2000,
+    current: 1850
+  },
+  steps: {
+    goal: 10000,
+    current: 7500
+  },
+  water: {
+    goal: 8,
+    current: 6
+  }
+};
+
+function startQuiz() {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  updateProgress();
+}
+
+function selectOption(element) {
+  element.parentElement.querySelectorAll('.option').forEach(opt => {
+    opt.classList.remove('selected');
+  });
+  element.classList.add('selected');
+}
+
+function updateProgress() {
+  const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+  document.getElementById('progress').style.width = `${progress}%`;
+  
+  const questionEl = document.getElementById('current-question');
+  questionEl.innerHTML = `
+    <h2>${questions[currentQuestion].question}</h2>
+    <div class="options">
+      ${questions[currentQuestion].options.map(opt => 
+        `<div class="option" onclick="selectOption(this)">${opt}</div>`
+      ).join('')}
+    </div>
+  `;
+  
+  document.getElementById('prev-btn').style.display = currentQuestion > 0 ? 'block' : 'none';
+  document.getElementById('next-btn').textContent = 
+    currentQuestion === totalQuestions - 1 ? '查看结果' : '下一题';
+}
+
+function nextQuestion() {
+  const selected = document.querySelector('.option.selected');
+  if (!selected && currentQuestion < totalQuestions - 1) {
+    alert('请选择一个选项');
+    return;
+  }
+  
+  if (currentQuestion < totalQuestions - 1) {
+    currentQuestion++;
+    updateProgress();
+  } else {
+    showResult();
+  }
+}
+
+function prevQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    updateProgress();
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+}
+
+function startJourney() {
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+}
+
+// New functions for dashboard actions
+function toggleMealLog() {
+  const meal = {
+    breakfast: {
+      name: '燕麦粥配坚果和水果',
+      calories: 350
+    },
+    lunch: {
+      name: '糙米饭配清炒时蔬',
+      calories: 450
+    },
+    dinner: {
+      name: '蒸鱼配花菜',
+      calories: 400
+    }
+  };
+
+  // Create a modal for meal logging
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+  `;
+  modal.innerHTML = `
+    <h3>记录今日餐点</h3>
+    <div class="meal-options">
+      ${Object.entries(meal).map(([key, value]) => `
+        <div class="meal-option" onclick="logMeal('${key}', ${value.calories})">
+          <h4>${value.name}</h4>
+          <p>${value.calories} 卡路里</p>
+        </div>
+      `).join('')}
+    </div>
+    <button class="btn" onclick="this.parentElement.remove()">关闭</button>
+  `;
+  document.body.appendChild(modal);
+}
+
+function logMeal(mealType, calories) {
+  dailyStats.calories.current += calories;
+  updateStats();
+  // Show confirmation message
+  alert(`已记录: ${mealType} (${calories} 卡路里)`);
+}
+
+// Update stats display
+function updateStats() {
+  const caloriesEl = document.querySelector('.stat-card:nth-child(1) .stat-value');
+  const waterEl = document.querySelector('.stat-card:nth-child(2) .stat-value');
+  const stepsEl = document.querySelector('.stat-card:nth-child(3) .stat-value');
+
+  if (caloriesEl) caloriesEl.textContent = dailyStats.calories.current;
+  if (waterEl) waterEl.textContent = `${dailyStats.water.current}/${dailyStats.water.goal}`;
+  if (stepsEl) stepsEl.textContent = `${(dailyStats.steps.current/1000).toFixed(1)}k`;
+}
+
+// Water tracking functionality
+document.querySelectorAll('.water-cup').forEach((cup, index) => {
+  cup.addEventListener('click', () => {
+    if (index < waterCount) {
+      // Remove water
+      waterCount = index;
+    } else {
+      // Add water
+      waterCount = index + 1;
+    }
+    updateWaterCups();
+  });
+});
+
+function updateWaterCups() {
+  const cups = document.querySelectorAll('.water-cup');
+  cups.forEach((cup, index) => {
+    cup.classList.toggle('filled', index < waterCount);
+  });
+  dailyStats.water.current = waterCount;
+  updateStats();
+}
+
+// New functions added as per the plan
+function viewProgress() {
+  // Create a modal to show progress stats
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-width: 90%;
+    width: 340px;
+  `;
+  
+  const progressData = {
+    calories: Math.round((dailyStats.calories.current / dailyStats.calories.goal) * 100),
+    water: Math.round((dailyStats.water.current / dailyStats.water.goal) * 100),
+    steps: Math.round((dailyStats.steps.current / dailyStats.steps.goal) * 100)
+  };
+
+  modal.innerHTML = `
+    <h3 style="margin-bottom: 1.5rem">今日进度</h3>
+    <div style="margin-bottom: 1rem;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+        <span>卡路里</span>
+        <span>${progressData.calories}%</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" style="width: ${progressData.calories}%"></div>
+      </div>
+    </div>
+    <div style="margin-bottom: 1rem;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+        <span>饮水量</span>
+        <span>${progressData.water}%</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" style="width: ${progressData.water}%"></div>
+      </div>
+    </div>
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+        <span>步数</span>
+        <span>${progressData.steps}%</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" style="width: ${progressData.steps}%"></div>
+      </div>
+    </div>
+    <button class="btn" onclick="this.parentElement.remove()">关闭</button>
+  `;
+  document.body.appendChild(modal);
+}
+
+function browseRecipes() {
+  const recipes = [
+    { name: '燕麦能量碗', type: '早餐', calories: 320 },
+    { name: '藜麦沙拉', type: '午餐', calories: 400 },
+    { name: '清蒸鲈鱼', type: '晚餐', calories: 280 }
+  ];
+
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-width: 90%;
+    width: 340px;
+  `;
+
+  modal.innerHTML = `
+    <h3 style="margin-bottom: 1.5rem">推荐食谱</h3>
+    <div class="meal-options">
+      ${recipes.map(recipe => `
+        <div class="meal-option">
+          <h4>${recipe.name}</h4>
+          <p>${recipe.type} • ${recipe.calories} 卡路里</p>
+        </div>
+      `).join('')}
+    </div>
+    <button class="btn" onclick="this.parentElement.remove()">关闭</button>
+  `;
+  document.body.appendChild(modal);
+}
+
+function viewShoppingList() {
+  const groceries = [
+    { category: '蔬果', items: ['西兰花', '胡萝卜', '菠菜', '苹果'] },
+    { category: '主食', items: ['燕麦', '糙米', '全麦面包'] },
+    { category: '蛋白质', items: ['鸡胸肉', '鲈鱼', '鸡蛋'] }
+  ];
+
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-width: 90%;
+    width: 340px;
+  `;
+
+  modal.innerHTML = `
+    <h3 style="margin-bottom: 1.5rem">购物清单</h3>
+    ${groceries.map(group => `
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="color: var(--dark); margin-bottom: 0.5rem;">${group.category}</h4>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+          ${group.items.map(item => `
+            <div style="background: var(--accent); padding: 0.5rem 1rem; border-radius: var(--radius);">
+              ${item}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
+    <button class="btn" onclick="this.parentElement.remove()">关闭</button>
+  `;
+  document.body.appendChild(modal);
+}
+
+function initApp() {
+  // Store elements
+  const welcomeScreen = document.getElementById('welcome');
+  const quizScreen = document.getElementById('quiz');
+  const resultScreen = document.getElementById('result');
+  const dashboardScreen = document.getElementById('dashboard');
+  const waterProgress = document.getElementById('water-progress');
+
+  // Set initial display states
+  if (welcomeScreen) welcomeScreen.style.display = 'flex';
+  if (quizScreen) quizScreen.style.display = 'none';
+  if (resultScreen) resultScreen.style.display = 'none';
+  if (dashboardScreen) dashboardScreen.style.display = 'none';
+
+  // Initialize water tracking only if element exists
+  if (waterProgress) {
+    updateWaterCups();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initApp);
+</script>
+
+</body></html>
