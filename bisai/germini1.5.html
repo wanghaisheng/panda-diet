@@ -1,0 +1,189 @@
+
+<html><head><base href="https://websim.ai/">
+    <title>熊猫饮食 (Panda Diet)</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        background: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .screen {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 90%;
+        max-width: 600px;
+      }
+      .hidden{
+        display: none;
+      }
+
+      button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      svg {
+        width: 100px;
+        height: 100px;
+        margin: 20px 0;
+      }
+
+      .panda {
+        animation: panda-animation 5s infinite;
+      }
+
+      @keyframes panda-animation {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0); }
+      }
+
+    </style>
+  </head><body>
+
+    <div id="welcome" class="screen">
+      <svg class="panda" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="250" r="200" fill="#333" />
+        <ellipse cx="170" cy="150" rx="50" ry="70" fill="white" />
+        <ellipse cx="330" cy="150" rx="50" ry="70" fill="white" />
+        <circle cx="170" cy="170" r="20" fill="black" />
+        <circle cx="330" cy="170" r="20" fill="black" />
+      </svg>
+      <h1>欢迎来到熊猫饮食!</h1>
+      <p>Achieve your dietary goals with our personalized plans.</p>
+      <button onclick="showScreen('quiz')">开始体验 (Start the Experience)</button>
+    </div>
+
+    <div id="quiz" class="screen hidden">
+      <h1>Personality Quiz</h1>
+      <div id="quiz-questions">
+      </div>
+      <button onclick="showScreen('result')">提交 (Submit)</button>
+    </div>
+
+    <div id="result" class="screen hidden">
+      <h1>Dietary Profile Result</h1>
+      <p>Your dietary type: <b>Balanced Earth</b></p>
+      <p>Description of Balanced Earth.</p>
+      <button>Continue</button>
+    </div>
+  
+
+<script>
+    let currentScreen = 'welcome';
+    let quizAnswers = {};
+
+    function showScreen(screenId) {
+        document.getElementById(currentScreen).classList.add('hidden');
+        document.getElementById(screenId).classList.remove('hidden');
+        currentScreen = screenId;
+
+        if(screenId === 'quiz'){
+          getQuizQuestions()
+        }
+    }
+
+
+
+    async function getQuizQuestions() {
+        const quizContainer = document.getElementById('quiz-questions');
+        try {
+            const response = await fetch('/api/ai_completion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    prompt: `Generate a JSON array of multiple-choice quiz questions related to lifestyle and food preferences for a diet app. Each question should include the question text, an array of options (strings), and a unique identifier (string).
+
+<typescript-interface>
+interface QuizQuestion {
+  id: string;
+  text: string;
+  options: string[];
+}
+
+interface Response {
+  questions: QuizQuestion[];
+}
+</typescript-interface>
+<example>
+{
+  "questions": [
+    {
+      "id": "morning-feeling",
+      "text": "How do you generally feel in the mornings?",
+      "options": ["Energized", "Sluggish", "Neutral", "Anxious"]
+    },
+    {
+      "id": "food-craving",
+      "text": "What type of food do you crave most?",
+      "options": ["Savory", "Sweet", "Spicy", "Salty"]
+    },
+    {
+      "id": "stress-handling",
+      "text": "How do you handle stress?",
+      "options": ["Exercise", "Eat", "Meditate", "Sleep"]
+    },
+    {
+      "id": "life-pace",
+      "text": "What's your preferred pace of life?",
+      "options": ["Fast-paced", "Balanced", "Slow-paced", "Don't know"]
+    }
+  ]
+}
+</example>`,
+                    data: ''
+                }),
+            });
+
+            const data = await response.json();
+            data.questions.forEach(question => {
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `<h2>${question.text}</h2>`;
+                question.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.textContent = option;
+                    optionButton.value = option;
+                    optionButton.onclick = () => handleAnswer(question.id, option);
+                    questionDiv.appendChild(optionButton);
+                });
+                quizContainer.appendChild(questionDiv);
+            });
+
+        } catch (error) {
+            console.error('Error fetching quiz questions:', error);
+            quizContainer.innerHTML = "<p>Error loading quiz questions.</p>";
+        }
+    }
+
+    function handleAnswer(questionId, answer) {
+      quizAnswers[questionId] = answer;
+      console.log(quizAnswers)
+    }
+
+
+</script>
+
+
+</body></html>
